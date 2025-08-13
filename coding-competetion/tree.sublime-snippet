@@ -1,0 +1,72 @@
+<snippet>
+    <content><![CDATA[
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node *left, *right;
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+
+Node* buildTree(int n) {
+    if (n == 0) return NULL;
+    
+    int val;
+    cin >> val;
+    Node* root = new Node(val);
+    
+    queue<Node*> q;
+    q.push(root);
+    
+    int count = 1;
+    while (!q.empty() && count < n) {
+        Node* curr = q.front();
+        q.pop();
+
+        int leftVal, rightVal;
+        cin >> leftVal >> rightVal;
+
+        if (leftVal != -1) {
+            curr->left = new Node(leftVal);
+            q.push(curr->left);
+        }
+        if (rightVal != -1) {
+            curr->right = new Node(rightVal);
+            q.push(curr->right);
+        }
+
+        count += 2;
+    }
+
+    return root;
+}
+
+${1:void solve(Node *root) 
+{
+
+}}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int t;
+    cin >> t;
+    while (t--) 
+    {
+        int n;
+        cin >> n;
+        Node* root = buildTree(n); 
+        cout << solve(root) << endl;
+    }
+    return 0;
+}
+]]></content>
+    <tabTrigger>tree</tabTrigger>
+    <scope>source.c++</scope>
+    <description>Tree input + solve() C++ template</description>
+</snippet>
